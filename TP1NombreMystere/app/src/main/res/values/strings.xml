@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TP1-NombreMystere</string>
+    <string name="texte_coups_restants">Nombre de coups restants :</string>
+    <string name="text_quitter">Quitter</string>
+    <string name="text_rejouer">Rejouer</string>
+    <string name="texte_saisir">saisir un nombre</string>
+    <string name="texte_perdu">Perdu !!! Le nombre mystère était :</string>
+    <string name="text_ok">OK</string>
+</resources>
