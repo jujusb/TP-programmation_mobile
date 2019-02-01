@@ -4,7 +4,7 @@ package com.example.tp2_listeactivity;
 
 public class Tache {
 
-    public enum Categorie {Travail, Sport, Menage, Lecture, Enfants, Courses};
+    public enum Categorie {Travail, Sport, Menage, Lecture, Enfants, Courses, Inconnu};
 
 
     private String nom;
@@ -35,6 +35,7 @@ public class Tache {
                 break;
             default:
                 System.out.println("Erreur catégorie non trouvée!");
+                this.categorie = Categorie.Inconnu;
         }
         this.duree = Integer.parseInt(duree);
         this.description = desc;
