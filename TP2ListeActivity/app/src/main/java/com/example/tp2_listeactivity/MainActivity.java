@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,11 +27,12 @@ public class MainActivity extends AppCompatActivity {
     public final int CODE_AJOUT_ACTIVITE = 1;
     public static final int RESULT_OK = 0;
     //public final int RESULT_KO;
+    public static int supprimerTache=0;
 
     private List<Tache> mesDonnees;
     private TacheAdapter adapter;
 
-    private ListView myListView;
+    private RecyclerView myListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.adapter = new TacheAdapter(getApplicationContext(), this.mesDonnees);
 
-        myListView = (ListView) findViewById(R.id.myListView);
+        myListView = (RecyclerView) findViewById(R.id.myListView);
         myListView.setAdapter(this.adapter);
 
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -58,6 +61,30 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("Desc", mesDonnees.get(position).getDescription());
 
                 startActivity(intent);
+            }
+        });
+
+        myListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                DialogFragment newFragment = new SupprimerDialogFragment(mesDonnees, adapter, position);
+                //newFragment.setTargetFragment(this, RESULT_OK);
+                newFragment.show(getSupportFragmentManager(), "suppression");
+                /*
+                if (supprimerTache == 1) {
+                    mesDonnees.remove(position);
+                    adapter.notifyDataSetChanged();
+                    supprimerTache = 0;
+                }
+                */
+                /*
+                newFragment.onActivityResult(newFragment.getTargetRequestCode(),RESULT_OK,getIntent());
+                if(newFragment.isCancelable()) {
+                    mesDonnees.remove(position);
+                    adapter.notifyDataSetChanged();
+                }
+                */
+                return true;
             }
         });
 
