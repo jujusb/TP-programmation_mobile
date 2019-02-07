@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Tache> mesDonnees;
     private TacheAdapter adapter;
 
-    private RecyclerView myListView;
+    private ListView myListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.adapter = new TacheAdapter(getApplicationContext(), this.mesDonnees);
 
-        myListView = (RecyclerView) findViewById(R.id.myListView);
+        myListView = (ListView) findViewById(R.id.myListView);
         myListView.setAdapter(this.adapter);
 
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,20 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 DialogFragment newFragment = new SupprimerDialogFragment(mesDonnees, adapter, position);
                 //newFragment.setTargetFragment(this, RESULT_OK);
                 newFragment.show(getSupportFragmentManager(), "suppression");
-                /*
-                if (supprimerTache == 1) {
-                    mesDonnees.remove(position);
-                    adapter.notifyDataSetChanged();
-                    supprimerTache = 0;
-                }
-                */
-                /*
-                newFragment.onActivityResult(newFragment.getTargetRequestCode(),RESULT_OK,getIntent());
-                if(newFragment.isCancelable()) {
-                    mesDonnees.remove(position);
-                    adapter.notifyDataSetChanged();
-                }
-                */
+
                 return true;
             }
         });
