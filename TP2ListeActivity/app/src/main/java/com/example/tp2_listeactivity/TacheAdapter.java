@@ -42,6 +42,13 @@ public class TacheAdapter extends BaseAdapter {
         return i;
     }
 
+    /**
+     * Getter du i-ème élément de la List
+     * @param i Numéro de l'élément
+     * @param view
+     * @param viewGroup
+     * @return La vue d'un élément de la liste
+     */
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         View res = inflater.inflate(R.layout.tache,null);

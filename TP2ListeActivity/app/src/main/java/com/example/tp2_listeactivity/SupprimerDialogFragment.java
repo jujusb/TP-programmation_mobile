@@ -29,9 +29,6 @@ public class SupprimerDialogFragment extends DialogFragment {
         builder.setMessage(R.string.dialog_suppression)
                 .setPositiveButton(R.string.ok_suppression, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // FIRE ZE MISSILES!
-                        //listView.rem
-                        //MainActivity.supprimerTache = 1;
                         list.remove(index);
                         adapter.notifyDataSetChanged();
                         dialog.dismiss();
