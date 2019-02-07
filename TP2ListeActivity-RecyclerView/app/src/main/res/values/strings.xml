@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TP2 -ListeActivity</string>
+    <string name="titre_tache">nom</string>
+    <string name="duree_tache">duree</string>
+    <string name="categorie_tache">categorie</string>
+    <string name="text_description_tache">description</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="dialog_suppression">Voulez-vous bien supprimer cette tâche?</string>
+    <string name="ok_suppression">Oui</string>
+    <string name="cancel_suppression">Non</string>
+</resources>
