@@ -1,13 +1,18 @@
 package com.example.tp2_listeactivity;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -29,25 +34,37 @@ public class MainActivity extends AppCompatActivity {
     private List<Tache> mesDonnees;
     private TacheAdapter adapter;
 
-    private RecyclerView myListView;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialisation des données
         this.mesDonnees = new ArrayList<>();
 
         this.mesDonnees.add(new Tache("Ping", "Sport", "90", "Entrainement de tennis de table"));
         this.mesDonnees.add(new Tache("Volley", "Sport", "90", "Entrainement de volley"));
+
         this.mesDonnees.add(new Tache("Proba", "Travail", "120", "Les probas, c'est cool"));
 
-        this.adapter = new TacheAdapter(getApplicationContext(), this.mesDonnees);
 
-        myListView = (RecyclerView) findViewById(R.id.myListView);
-        myListView.setAdapter(this.adapter);
 
-        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        this.recyclerView = (RecyclerView) findViewById(R.id.myListView);
+        this.adapter = new TacheAdapter(this.mesDonnees);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(
+                new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+
+        recyclerView.setAdapter(this.adapter);
+
+        // Ces deux méthodes ne sont plus utilisables
+        /*
+        recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), DetailTacheActivity.class);
@@ -61,29 +78,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        myListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        recyclerView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 DialogFragment newFragment = new SupprimerDialogFragment(mesDonnees, adapter, position);
                 //newFragment.setTargetFragment(this, RESULT_OK);
                 newFragment.show(getSupportFragmentManager(), "suppression");
-                /*
-                if (supprimerTache == 1) {
-                    mesDonnees.remove(position);
-                    adapter.notifyDataSetChanged();
-                    supprimerTache = 0;
-                }
-                */
-                /*
-                newFragment.onActivityResult(newFragment.getTargetRequestCode(),RESULT_OK,getIntent());
-                if(newFragment.isCancelable()) {
-                    mesDonnees.remove(position);
-                    adapter.notifyDataSetChanged();
-                }
-                */
+
                 return true;
             }
         });
+        */
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +119,5 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
     }
-
 
 }
