@@ -19,12 +19,15 @@ public class DetailTacheActivity extends AppCompatActivity {
         setContentView(R.layout.detail_tache);
 
         Intent intent = this.getIntent();
+
+        // Association des vues du Layout
         text_titre = (TextView) findViewById(R.id.text_titre);
         text_titre.setText(intent.getStringExtra("Titre"));
 
         text_duree = (TextView) findViewById(R.id.text_duree);
         text_duree.setText(intent.getIntExtra("Duree", 0)+"");
 
+        // Association de l'image selon la catégorie
         image = (ImageView) findViewById(R.id.image_tache);
 
         switch ( intent.getStringExtra("Categorie") ) {

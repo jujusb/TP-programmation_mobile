@@ -18,6 +18,8 @@ public class AjoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ajout_tache);
+
+        // Association des vues du layout
         text_nom=(TextView) findViewById(R.id.text_nom);
         text_duree=(TextView) findViewById(R.id.text_duree);
         text_categorie=(TextView) findViewById(R.id.text_categorie);
@@ -26,6 +28,10 @@ public class AjoutActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Méthode appelée lors de la validation de la création d'une tâche
+     * Le résultat est envoyé à l'activité 'MainActivity'
+     */
     public void finish() {
         Intent data = new Intent();
         data.putExtra("nom",text_nom.getText().toString());

@@ -1,24 +1,17 @@
 package com.example.tp2_listeactivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
-
-import static com.example.tp2_listeactivity.Tache.Categorie.Courses;
 
 public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder> {
 
@@ -61,6 +54,7 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
                 holder.image.setImageResource(R.drawable.point_interro_);
         }
 
+        // Clique court
         holder.itemView.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -76,11 +70,11 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
             }
         });
 
+        // clique long
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 DialogFragment newFragment = new SupprimerDialogFragment(mesDonnees, TacheAdapter.this, position);
-                //newFragment.setTargetFragment(this, RESULT_OK);
                 newFragment.show( ((AppCompatActivity) v.getContext()).getSupportFragmentManager() , "suppression");
 
                 return true;
@@ -96,7 +90,8 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-                // mise à jour des champs de la vue
+
+        // mise à jour des champs de la vue
         public TextView nomTache;
         public ImageView image;
 

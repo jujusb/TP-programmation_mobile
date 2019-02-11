@@ -1,7 +1,5 @@
 package com.example.tp2_listeactivity;
 
-
-
 public class Tache {
 
     public enum Categorie {Travail, Sport, Menage, Lecture, Enfants, Courses, Inconnu};
@@ -12,8 +10,17 @@ public class Tache {
     private String description;
     private Categorie categorie;
 
+    /**
+     * Contructeur d'une tâche
+     * @param nom Nom de la tâche
+     * @param categorie Catégorie de la tâche
+     * @param duree Durée de la tâche
+     * @param desc Description de la tâche
+     */
     public Tache(String nom, String categorie, String duree, String desc) {
         this.nom = nom;
+
+        // Association de la catégorie à partir d'une chaine de caractères (String)
         switch (categorie) {
             case "Travail":
                 this.categorie = Categorie.Travail;
@@ -52,18 +59,34 @@ public class Tache {
         this.nom = nom;
     }
 
+    /**
+     * Getter pour récupérer le nom d'une tâche
+     * @return Le nom de la tâche
+     */
     public String getNom() {
         return nom;
     }
 
+    /**
+     * Getter pour la durée d'une tâche
+     * @return La durée de la tâche
+     */
     public int getDuree() {
         return duree;
     }
 
+    /**
+     * Getter pour la description d'une tâche
+     * @return La description de la tâche
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Getter pour la catégorie d'une tâche
+     * @return La catégorie de la tâche
+     */
     public Categorie getCategorie() {
         return categorie;
     }
