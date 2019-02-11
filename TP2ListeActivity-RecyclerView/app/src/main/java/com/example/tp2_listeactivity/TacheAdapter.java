@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,7 +35,7 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
         return new MyViewHolder(tacheView);
     }
 
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         Tache tache = mesDonnees.get(position);
         holder.nomTache.setText(tache.getNom());
         switch (tache.getCategorie()) {
@@ -58,6 +60,32 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
             default:
                 holder.image.setImageResource(R.drawable.point_interro_);
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), DetailTacheActivity.class);
+
+                intent.putExtra("Titre", mesDonnees.get(position).getNom());
+                intent.putExtra("Duree", mesDonnees.get(position).getDuree());
+                intent.putExtra("Categorie", mesDonnees.get(position).getCategorie().toString());
+                intent.putExtra("Desc", mesDonnees.get(position).getDescription());
+
+                v.getContext().startActivity(intent);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                DialogFragment newFragment = new SupprimerDialogFragment(mesDonnees, TacheAdapter.this, position);
+                //newFragment.setTargetFragment(this, RESULT_OK);
+                newFragment.show( ((AppCompatActivity) v.getContext()).getSupportFragmentManager() , "suppression");
+
+                return true;
+            }
+        });
     }
 
     public int getItemCount() {
