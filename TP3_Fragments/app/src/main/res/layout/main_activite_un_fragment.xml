@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <fragment
-        android:id="@+id/fragment5"
+        android:id="@+id/fragment_list_tache"
         android:name="com.example.tp3_fragments.LesTachesFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

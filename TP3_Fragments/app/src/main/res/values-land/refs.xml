@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<item name="content_main"
+		type="layout">@layout/main_activite_deux_fragments</item>
+	<bool name="twoPane">true</bool>
+</resources>
+
