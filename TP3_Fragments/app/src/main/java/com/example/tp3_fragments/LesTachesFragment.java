@@ -11,8 +11,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,7 @@ public class LesTachesFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_list_tache, container, false);
 
         this.lesDonnes = new ArrayList<>();
-        this.adapter = new TacheAdapter(lesDonnes);
+        this.adapter = new TacheAdapter(lesDonnes,lesTachesInterface);
         this.rvTache = (RecyclerView) v.findViewById(R.id.recycler_view);
 
 
@@ -45,18 +47,25 @@ public class LesTachesFragment extends Fragment {
         rvTache.setAdapter(this.adapter);
 
 
+/*
+        public void onItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                lesTachesInterface.tacheSelectionnee(lesDonnes.get(position));
+
+            }
+        });
+*/
         return v;
     }
 
     public void ajoutTache(Tache t) {
-
         this.lesDonnes.add(t);
-
     }
 
     public void onAttach(Context context){
         super.onAttach(context);
-        Log.d("fragment","nous venons d'attacher l'activite a LesTachesFragments");
+        Log.d("notreFragment","nous venons d'attacher l'activite a LesTachesFragments");
         if(context instanceof LesTachesInterface) lesTachesInterface =
                 (LesTachesInterface) context;
     }

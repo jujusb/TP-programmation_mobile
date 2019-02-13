@@ -1,5 +1,6 @@
 package com.example.tp3_fragments;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -16,9 +17,11 @@ import java.util.List;
 public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder> {
 
     private List<Tache> mesDonnees;
+    private LesTachesInterface lesTachesInterface;
 
-    public TacheAdapter(List<Tache> mesDonnees) {
+    public TacheAdapter(List<Tache> mesDonnees,LesTachesInterface lesTachesInterface) {
         this.mesDonnees = mesDonnees;
+        this.lesTachesInterface=lesTachesInterface;
     }
 
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -54,11 +57,21 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
                 holder.image.setImageResource(R.drawable.point_interro_);
         }
 
-        /*
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                lesTachesInterface.tacheSelectionnee(mesDonnees.get(position));
+
+                /*
+                FragmentManager fm = this.getFragmentManager();
+                DetailFragment detailFragment;
+                detailFragment = (DetailFragment) fm.findFragmentById(R.id.fragment_list_tache);
+
+                lesTachesFragment.ajoutTache(new Tache("Ping", "Sport", "90", "Entrainement de tennis de table"));
+                */
+                /*
                 Intent intent = new Intent(v.getContext(), DetailTacheActivity.class);
 
                 intent.putExtra("Titre", mesDonnees.get(position).getNom());
@@ -67,9 +80,11 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
                 intent.putExtra("Desc", mesDonnees.get(position).getDescription());
 
                 v.getContext().startActivity(intent);
+                */
             }
         });
 
+        /*
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -81,6 +96,7 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
             }
         });
         */
+
     }
 
     public int getItemCount() {

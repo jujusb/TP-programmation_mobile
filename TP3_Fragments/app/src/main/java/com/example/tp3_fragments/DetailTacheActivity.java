@@ -16,7 +16,7 @@ public class DetailTacheActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detail_tache);
+        setContentView(R.layout.activity_detail_tache);
 
         Intent intent = this.getIntent();
         text_titre = (TextView) findViewById(R.id.text_titre);
@@ -50,10 +50,7 @@ public class DetailTacheActivity extends AppCompatActivity {
                 image.setImageResource(R.drawable.point_interro_);
         }
 
-
-
         text_desc = (TextView) findViewById(R.id.text_desc);
         text_desc.setText(intent.getStringExtra("Desc"));
-
     }
 }

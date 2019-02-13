@@ -1,6 +1,7 @@
 package com.example.tp3_fragments;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity implements LesTachesInterface {
+
+    DetailFragment detailFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements LesTachesInterfac
         lesTachesFragment.ajoutTache(new Tache("Proba", "Travail", "120", "Les probas, c'est cool"));
 
 
+
     }
 
     @Override
@@ -67,6 +72,16 @@ public class MainActivity extends AppCompatActivity implements LesTachesInterfac
 
     @Override
     public void tacheSelectionnee(Tache t) {
-        Log.d("fragment", "tacheSelectionnee: Une tache a été selectionnée ");
+//        detailFragment.setTache(t);
+        Log.d("notreFragment", "tacheSelectionnee: " + t.getNom() + " a été selectionnée ");
+
+        Intent intent = new Intent(this, DetailTacheActivity.class);
+        intent.putExtra("Titre", t.getNom());
+        intent.putExtra("Duree", t.getDuree());
+        intent.putExtra("Categorie", t.getCategorie().toString());
+        intent.putExtra("Desc", t.getDescription());
+        startActivity(intent);
+
+
     }
 }
