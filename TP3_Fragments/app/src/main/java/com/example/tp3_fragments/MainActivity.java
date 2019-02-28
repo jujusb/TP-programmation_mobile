@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity implements LesTachesInterfac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -72,16 +72,20 @@ public class MainActivity extends AppCompatActivity implements LesTachesInterfac
 
     @Override
     public void tacheSelectionnee(Tache t) {
-//        detailFragment.setTache(t);
+
         Log.d("notreFragment", "tacheSelectionnee: " + t.getNom() + " a été selectionnée ");
 
+        //detailFragment.setTache(t);
+
+        // Création d'une activité DetailTacheActivity avec les détails de la tache selectionnée
         Intent intent = new Intent(this, DetailTacheActivity.class);
+
         intent.putExtra("Titre", t.getNom());
         intent.putExtra("Duree", t.getDuree());
         intent.putExtra("Categorie", t.getCategorie().toString());
         intent.putExtra("Desc", t.getDescription());
-        startActivity(intent);
 
+        startActivity(intent);
 
     }
 }
