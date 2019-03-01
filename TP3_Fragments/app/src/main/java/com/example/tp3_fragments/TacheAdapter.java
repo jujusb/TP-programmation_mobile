@@ -1,7 +1,5 @@
 package com.example.tp3_fragments;
 
-import android.app.FragmentManager;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +17,12 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
     private List<Tache> mesDonnees;
     private LesTachesInterface lesTachesInterface;
 
-    public TacheAdapter(List<Tache> mesDonnees,LesTachesInterface lesTachesInterface) {
+    /**
+     * Constructeur de l'adapter
+     * @param mesDonnees List des données à afficher
+     * @param lesTachesInterface Référence vers une Activity qui contient des tâches à afficher
+     */
+    public TacheAdapter(List<Tache> mesDonnees, LesTachesInterface lesTachesInterface) {
         this.mesDonnees = mesDonnees;
         this.lesTachesInterface=lesTachesInterface;
     }
@@ -57,39 +60,19 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
                 holder.image.setImageResource(R.drawable.point_interro_);
         }
 
-
+        // clique court sur un élément -> détail
         holder.itemView.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 lesTachesInterface.tacheSelectionnee(mesDonnees.get(position));
-
-                /*
-                FragmentManager fm = this.getFragmentManager();
-                DetailFragment detailFragment;
-                detailFragment = (DetailFragment) fm.findFragmentById(R.id.fragment_list_tache);
-
-                lesTachesFragment.ajoutTache(new Tache("Ping", "Sport", "90", "Entrainement de tennis de table"));
-                */
-                /*
-                Intent intent = new Intent(v.getContext(), DetailTacheActivity.class);
-
-                intent.putExtra("Titre", mesDonnees.get(position).getNom());
-                intent.putExtra("Duree", mesDonnees.get(position).getDuree());
-                intent.putExtra("Categorie", mesDonnees.get(position).getCategorie().toString());
-                intent.putExtra("Desc", mesDonnees.get(position).getDescription());
-
-                v.getContext().startActivity(intent);
-                */
             }
         });
 
-
+        // clique long sur un élément -> suppression
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 DialogFragment newFragment = new SupprimerDialogFragment(mesDonnees, TacheAdapter.this, position);
-                //newFragment.setTargetFragment(this, RESULT_OK);
                 newFragment.show( ((AppCompatActivity) v.getContext()).getSupportFragmentManager() , "suppression");
 
                 return true;
@@ -104,10 +87,9 @@ public class TacheAdapter extends RecyclerView.Adapter<TacheAdapter.MyViewHolder
     }
 
 
-
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
-                // mise à jour des champs de la vue
+
+        // mise à jour des champs de la vue
         public TextView nomTache;
         public ImageView image;
 

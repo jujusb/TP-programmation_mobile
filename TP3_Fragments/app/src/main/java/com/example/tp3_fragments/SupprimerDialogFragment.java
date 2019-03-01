@@ -14,6 +14,12 @@ public class SupprimerDialogFragment extends DialogFragment {
     private TacheAdapter adapter;
     private int index;
 
+    /**
+     * Constructeur du SupprimerDialogFragment
+     * @param list Liste des tâches
+     * @param adapter Adapter associé à la RecyclerView
+     * @param index Indice de l'élément à supprimer
+     */
     public SupprimerDialogFragment(List<Tache> list, TacheAdapter adapter, int index) {
         this.list = list;
         this.adapter=adapter;

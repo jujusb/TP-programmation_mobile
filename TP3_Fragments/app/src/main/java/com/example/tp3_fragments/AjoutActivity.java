@@ -42,6 +42,10 @@ public class AjoutActivity extends AppCompatActivity {
         super.finish();
     }
 
+    /**
+     * Méthode associée au bouton de validation de la création d'une tâche
+     * @param view La vue associée
+     */
     public void button_ok_clicked(View view) {
         finish();
     }

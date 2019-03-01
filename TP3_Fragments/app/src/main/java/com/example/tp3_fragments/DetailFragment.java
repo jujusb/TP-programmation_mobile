@@ -21,11 +21,14 @@ public class DetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+
+        // Association des vues au layout
         view = inflater.inflate(R.layout.fragment_detail_tache, container, false);
         text_titre = (TextView) view.findViewById(R.id.text_titre);
         text_duree = (TextView) view.findViewById(R.id.text_duree);
         image = (ImageView) view.findViewById(R.id.image_tache);
         text_desc = (TextView) view.findViewById(R.id.text_desc);
+
         return view;
     }
 

@@ -5,14 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity implements LesTachesInterface {
 
@@ -27,24 +22,24 @@ public class MainActivity extends AppCompatActivity implements LesTachesInterfac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
+        // Bouton '+' pour l'ajout de tâches
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(),AjoutActivity.class);
-                startActivityForResult(intent,CODE_AJOUT_ACTIVITE);
+                startActivityForResult(intent, CODE_AJOUT_ACTIVITE);
             }
         });
 
 
+        // Gestion des fragments
         FragmentManager fm = this.getFragmentManager();
-
 
         lesTachesFragment = (LesTachesFragment) fm.findFragmentById(R.id.fragment_list_tache);
         if (savedInstanceState == null) {
+            lesTachesFragment.ajoutTache(new Tache("TP3", "Travail", "240", "TP3 Fragments réalisé par Steeve Doppler et Julio Santilario-Berthilier"));
             lesTachesFragment.ajoutTache(new Tache("Ping", "Sport", "90", "Entrainement de tennis de table"));
             lesTachesFragment.ajoutTache(new Tache("Volley", "Sport", "90", "Entrainement de volley"));
             lesTachesFragment.ajoutTache(new Tache("Proba", "Travail", "120", "Les probas, c'est cool"));
@@ -58,41 +53,22 @@ public class MainActivity extends AppCompatActivity implements LesTachesInterfac
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
+    /**
+     * Méthode qui envoie les informations d'une tâche au DetailFragment
+     * @param t La tâche selectionnée
+     */
     @Override
     public void tacheSelectionnee(Tache t) {
 
         Log.d("notreFragment", "tacheSelectionnee: " + t.getNom() + " a été selectionnée ");
 
+
+        // Si twoPanes est vrai, alors on utilise deux fragments dans MainActivity
         boolean twoPanes = getResources().getBoolean(R.bool.twoPane);
 
         if (twoPanes) {
             detailFragment.setTache(t);
-        }
-
-
-        else {
+        } else {
             // Création d'une activité DetailTacheActivity avec les détails de la tache selectionnée
             Intent intent = new Intent(this, DetailTacheActivity.class);
 
@@ -123,10 +99,7 @@ public class MainActivity extends AppCompatActivity implements LesTachesInterfac
                     data.getStringExtra("description")
             );
             lesTachesFragment.ajoutTache(t);
-            Log.d("Ajout Tache", "onActivityResult: Une tâche a été ajouté");
         }
-        else
-            Log.d("Ajout Tache", "onActivityResult: Erreur code");
     }
 
 

@@ -12,10 +12,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +34,8 @@ public class LesTachesFragment extends Fragment {
 
         this.lesDonnes = new ArrayList<>();
         this.adapter = new TacheAdapter(lesDonnes,lesTachesInterface);
+
+        // Création de la RecyclerView
         this.rvTache = (RecyclerView) v.findViewById(R.id.recycler_view);
 
 
@@ -47,6 +47,7 @@ public class LesTachesFragment extends Fragment {
 
         rvTache.setAdapter(this.adapter);
 
+        // Si on a sauvegardé une liste, on la récupère
         if (savedInstanceState != null) {
             for (Parcelable t : savedInstanceState.getParcelableArrayList("ListeTache") )
                 ajoutTache((Tache) t);
@@ -75,7 +76,6 @@ public class LesTachesFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList("ListeTache", (ArrayList<Tache>) lesDonnes);
-        //super.onSaveInstanceState(outState);
     }
 
 

@@ -1,12 +1,9 @@
 package com.example.tp3_fragments;
 
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Tache implements Parcelable {
-
-
 
     public enum Categorie {Travail, Sport, Menage, Lecture, Enfants, Courses, Inconnu};
 
