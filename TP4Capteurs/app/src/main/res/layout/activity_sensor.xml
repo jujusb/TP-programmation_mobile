@@ -1,32 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutDetails"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity"
-    tools:showIn="@layout/activity_main">
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textTitre"
+        android:id="@+id/nomCapteur"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/texte_titre"
-        android:textSize="30sp" />
+        android:text="TextView"
+        android:textSize="24sp" />
 
     <ListView
-        android:id="@+id/listeCapteurs"
+        android:id="@+id/listeInformations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/simple_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
         android:gravity="center"
         android:text="@string/texte_super"
         android:textSize="18sp" />
