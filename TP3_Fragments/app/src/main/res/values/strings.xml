@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">TP3_Fragments</string>
     <string name="action_settings">Settings</string>
+
+    <string name="titre_tache">Nom</string>
+    <string name="duree_tache">Duree</string>
+    <string name="categorie_tache">Categorie</string>
+    <string name="text_description_tache">Description</string>
+    <string name="dialog_suppression">Voulez-vous bien supprimer cette tâche?</string>
+    <string name="ok_suppression">Oui</string>
+    <string name="cancel_suppression">Non</string>
 </resources>

@@ -21,6 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetailTacheActivity"></activity>
+        <activity android:name=".AjoutActivity"></activity>
+
     </application>
 
 </manifest>

@@ -33,7 +33,7 @@ public class DetailFragment extends Fragment {
         tache = t;
         text_titre.setText(tache.getNom());
         text_desc.setText(tache.getDescription());
-        text_duree.setText(tache.getDuree());
+        text_duree.setText(tache.getDuree()+"");
         switch (tache.getCategorie()) {
             case Travail:
                 image.setImageResource(R.drawable.travail);

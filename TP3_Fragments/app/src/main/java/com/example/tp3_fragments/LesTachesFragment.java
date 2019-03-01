@@ -3,6 +3,7 @@ package com.example.tp3_fragments;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -46,21 +47,18 @@ public class LesTachesFragment extends Fragment {
 
         rvTache.setAdapter(this.adapter);
 
+        if (savedInstanceState != null) {
+            for (Parcelable t : savedInstanceState.getParcelableArrayList("ListeTache") )
+                ajoutTache((Tache) t);
+        }
 
-/*
-        public void onItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                lesTachesInterface.tacheSelectionnee(lesDonnes.get(position));
 
-            }
-        });
-*/
         return v;
     }
 
     public void ajoutTache(Tache t) {
         this.lesDonnes.add(t);
+        this.adapter.notifyDataSetChanged();
     }
 
     public void onAttach(Context context){
@@ -69,4 +67,16 @@ public class LesTachesFragment extends Fragment {
         if(context instanceof LesTachesInterface) lesTachesInterface =
                 (LesTachesInterface) context;
     }
+
+    public Tache getTache(int i) {
+        return lesDonnes.get(i);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList("ListeTache", (ArrayList<Tache>) lesDonnes);
+        //super.onSaveInstanceState(outState);
+    }
+
+
 }
