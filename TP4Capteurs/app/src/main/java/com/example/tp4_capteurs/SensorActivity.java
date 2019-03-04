@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ public class SensorActivity extends AppCompatActivity {
     private SensorManager sensorManager;
     private Sensor sensor;
 
+    private LinearLayout layoutDetails;
     private TextView nomCapteur;
     private ListView listeInformations;
 
@@ -28,6 +32,7 @@ public class SensorActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_sensor);
 
+        layoutDetails = (LinearLayout) findViewById(R.id.layoutDetails);
         nomCapteur = (TextView) findViewById(R.id.nomCapteur);
         listeInformations = (ListView) findViewById(R.id.listeInformations);
 
@@ -57,5 +62,18 @@ public class SensorActivity extends AppCompatActivity {
 
         listeInformations.setAdapter(this.detailAdapter);
 
+        if (sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            FragmentAccelerometre fragment = new FragmentAccelerometre(sensorManager);
+            sensorManager.registerListener(fragment, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+            fragmentTransaction.add(R.id.layoutDetails, fragment);
+            fragmentTransaction.commit();
+
+        }
+
     }
+
+
 }
