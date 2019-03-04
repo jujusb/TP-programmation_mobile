@@ -71,6 +71,14 @@ public class SensorActivity extends AppCompatActivity {
             fragmentTransaction.add(R.id.layoutDetails, fragment);
             fragmentTransaction.commit();
 
+        } else if (sensor.getType() == Sensor.TYPE_PROXIMITY) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            FragmentProximite fragment = new FragmentProximite(sensorManager);
+            sensorManager.registerListener(fragment, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+            fragmentTransaction.add(R.id.layoutDetails, fragment);
+            fragmentTransaction.commit();
         }
 
     }
