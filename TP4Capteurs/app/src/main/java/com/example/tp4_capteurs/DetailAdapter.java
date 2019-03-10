@@ -1,7 +1,6 @@
 package com.example.tp4_capteurs;
 
 import android.content.Context;
-import android.hardware.Sensor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,11 @@ public class DetailAdapter extends BaseAdapter {
     private List<String> deviceDetails;
     private LayoutInflater inflater;
 
+    /**
+     * Adapter permettant d'afficher les detail d'un capteur dans une ListView
+     * @param context Contexte d'affichage
+     * @param deviceDetails Liste des capteurs à afficher
+     */
     public DetailAdapter(Context context, List<String> deviceDetails) {
         this.deviceDetails = deviceDetails;
         this.inflater = LayoutInflater.from(context);

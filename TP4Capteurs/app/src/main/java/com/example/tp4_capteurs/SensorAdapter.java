@@ -15,6 +15,11 @@ public class SensorAdapter extends BaseAdapter {
     private List<Sensor> deviceSensors;
     private LayoutInflater inflater;
 
+    /**
+     * Adapter permettant d'afficher la liste des capteurs sous la forme d'une ListView
+     * @param context Contexte d'affichage
+     * @param deviceSensors Liste des capteurs à afficher
+     */
     public SensorAdapter(Context context, List<Sensor> deviceSensors) {
         this.deviceSensors = deviceSensors;
         this.inflater = LayoutInflater.from(context);

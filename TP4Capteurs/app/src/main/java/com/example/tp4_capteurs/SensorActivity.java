@@ -32,21 +32,24 @@ public class SensorActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_sensor);
 
+        // Association des vues
         layoutDetails = (LinearLayout) findViewById(R.id.layoutDetails);
         nomCapteur = (TextView) findViewById(R.id.nomCapteur);
         listeInformations = (ListView) findViewById(R.id.listeInformations);
 
+        // Récupération du nom du capteur selectionné
         Intent intent = getIntent();
         nomCapteur.setText(intent.getStringExtra("nom_capteur"));
 
+        // Recherche du capteur à partir de son nom
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
         final List<Sensor> deviceSensors = sensorManager.getSensorList(Sensor.TYPE_ALL);
         for (Sensor s : deviceSensors) {
             if (s.getName().equals(nomCapteur.getText().toString()))
                 sensor = s;
         }
 
+        // Création de la liste des caractéristiques du capteur
         List<String> details = new ArrayList<>();
         details.add("Vendor : " + sensor.getVendor());
         details.add("Power : " + sensor.getPower());
@@ -58,10 +61,11 @@ public class SensorActivity extends AppCompatActivity {
         else
             details.add("Wake up ? false");
 
+        // Création de l'adapteur
         this.detailAdapter = new DetailAdapter(this, details);
-
         listeInformations.setAdapter(this.detailAdapter);
 
+        // Ajout d'un fragment à l'activité selon le type du capteur selectionné
         if (sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

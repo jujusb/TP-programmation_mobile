@@ -1,5 +1,6 @@
 package com.example.tp4_capteurs;
 
+import android.annotation.SuppressLint;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -21,11 +22,11 @@ public class FragmentProximite extends Fragment implements SensorEventListener {
     private TextView distance;
 
     long lastUpdate;
-    final float DISTANCE_THRESHOLD = 0;
 
     private SensorManager sensorManager;
     private MediaPlayer mediaPlayer;
 
+    @SuppressLint("ValidFragment")
     public FragmentProximite(SensorManager sensorManager) {
         this.sensorManager = sensorManager;
     }
@@ -36,16 +37,20 @@ public class FragmentProximite extends Fragment implements SensorEventListener {
 
         view = inflater.inflate(R.layout.fragment_proximite, container, false);
 
+        // Association de la vue
         distance = (TextView) view.findViewById(R.id.distance);
 
-
+        // Initialisation d'un son
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.sabreclash);
 
         lastUpdate = System.currentTimeMillis();
         return view;
     }
 
-
+    /**
+     * Méthode qui met à jour les zones de textes du fragment
+     * @param event
+     */
     @Override
     public void onSensorChanged(SensorEvent event) {
 
@@ -54,12 +59,11 @@ public class FragmentProximite extends Fragment implements SensorEventListener {
 
         long curTime = System.currentTimeMillis();
 
-        if ((curTime - lastUpdate) > 100l) {
+        if ((curTime - lastUpdate) > 100L) {
 
             if (event.values[0] == 0)
                 mediaPlayer.start();
 
-            long diffTime = (curTime -lastUpdate);
             lastUpdate = curTime;
 
         }
@@ -72,6 +76,9 @@ public class FragmentProximite extends Fragment implements SensorEventListener {
         Log.d("Accelerometer", "onAccuracyChanged: "+accuracy);
     }
 
+    /**
+     * Méthode qui libère les ressources
+     */
     @Override
     public void onDetach() {
         super.onDetach();

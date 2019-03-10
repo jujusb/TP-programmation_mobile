@@ -18,6 +18,10 @@ import android.widget.ListView;
 
 import java.util.List;
 
+/**
+ * TP réalisé par Steeve Doppler et Julio Santilario-Berthilier
+ */
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -52,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new SensorAdapter(getApplicationContext(), deviceSensors);
         listeCapteurs.setAdapter(adapter);
 
-
+        // Si on clique sur un item, on ouvre une nouvelle activité
         listeCapteurs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

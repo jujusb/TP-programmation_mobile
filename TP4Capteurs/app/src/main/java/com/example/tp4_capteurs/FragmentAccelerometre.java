@@ -1,7 +1,7 @@
 package com.example.tp4_capteurs;
 
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -34,6 +34,7 @@ public class FragmentAccelerometre extends Fragment implements SensorEventListen
     private SensorManager sensorManager;
     private MediaPlayer mediaPlayer;
 
+    @SuppressLint("ValidFragment")
     public FragmentAccelerometre(SensorManager sensorManager) {
         this.sensorManager = sensorManager;
     }
@@ -44,17 +45,22 @@ public class FragmentAccelerometre extends Fragment implements SensorEventListen
 
         view = inflater.inflate(R.layout.fragment_accelerometre, container, false);
 
+        // Association des vues
         forceX = (TextView) view.findViewById(R.id.forceX);
         forceY = (TextView) view.findViewById(R.id.forceY);
         forceZ = (TextView) view.findViewById(R.id.forceZ);
 
+        // Initialisation d'un son
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.lightsabre);
 
         lastUpdate = System.currentTimeMillis();
         return view;
     }
 
-
+    /**
+     * Méthode qui met à jour les zones de textes du fragment
+     * @param event
+     */
     @Override
     public void onSensorChanged(SensorEvent event) {
         forceX.setText("ForceX : "+ event.values[0]);
@@ -73,6 +79,7 @@ public class FragmentAccelerometre extends Fragment implements SensorEventListen
             long diffTime = (curTime -lastUpdate);
             lastUpdate = curTime;
             float speed = Math.abs(x + y + z -last_x -last_y -last_z) / diffTime * 10000f;
+            // Si la vitesse est supérieure au seuil, on active le son
             if (speed > SHAKE_THRESHOLD) {
                 Log.d("Sound", "onSensorChanged: Sound");
                 mediaPlayer.start();
@@ -92,6 +99,9 @@ public class FragmentAccelerometre extends Fragment implements SensorEventListen
         Log.d("Accelerometer", "onAccuracyChanged: "+accuracy);
     }
 
+    /**
+     * Méthode qui libère les ressources
+     */
     @Override
     public void onDetach() {
         super.onDetach();
