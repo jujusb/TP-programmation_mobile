@@ -1,0 +1,8 @@
+GLSurfaceView -> implémentation sur Android + méthodes principales 
+Interaction avec l'écran tactile 
+Communication programme/shader -> compilation du code GLSL 
+Shader : transformations (translation, rotation, mise à l'échelle) 
+
+
+Démo pratique : 
+Mini explication du code (workflow) + démonstration du rendu 
