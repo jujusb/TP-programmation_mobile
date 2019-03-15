@@ -3,8 +3,7 @@ package com.example.tp5_vocabulaire
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
-import java.util.ArrayList
-import java.util.HashMap
+import java.util.*
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -73,6 +72,17 @@ object VocabulaireContent {
             }
             line=reader.readLine()
         }
+    }
+    fun selectFive(): MutableList<WordItem> {
+
+        val RETURN5ITEMS: MutableList<WordItem> = ArrayList()
+
+        var r = Random()
+        for (i in 0..4) {
+            var nb = r.nextInt(COUNT)
+            RETURN5ITEMS.add(ITEMS[nb])
+        }
+        return RETURN5ITEMS
     }
 
     /**
