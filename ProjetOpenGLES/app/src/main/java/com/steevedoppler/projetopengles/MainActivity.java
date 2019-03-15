@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         // get masked (not specific to a pointer) action
         int maskedAction = event.getActionMasked();
 
+        actionMove = false;
+
         switch (maskedAction) {
 
             case MotionEvent.ACTION_DOWN:
